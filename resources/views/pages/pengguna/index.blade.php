@@ -27,7 +27,7 @@
                 <div class="card no-b mb-2">
                     <div class="card-body">
                         <!-- Status Verifikasi -->
-                        <div class="form-group row" style="margin-top: -8px !important">
+                        <div class="form-group row" style="margin-top: -10px !important">
                             <label for="status" class="col-form-label s-12 col-md-4 text-right font-weight-bolder">Status Verifikasi : </label>
                             <div class="col-sm-4">
                                 <select name="status" id="status" class="select2 form-control r-0 light s-12">
@@ -39,7 +39,7 @@
                             </div>
                         </div> 
                         <!-- Status User -->
-                        <div class="form-group row" style="margin-top: -8px !important">
+                        <div class="form-group row" style="margin-top: -10px !important">
                             <label for="status_user" class="col-form-label s-12 col-md-4 text-right font-weight-bolder">Status User : </label>
                             <div class="col-sm-4">
                                 <select name="status_user" id="status_user" class="select2 form-control r-0 light s-12">
@@ -49,7 +49,7 @@
                                 </select>
                             </div>
                         </div> 
-                        <div class="form-group row" style="margin-top: -8px !important">
+                        <div class="form-group row" style="margin-top: -10px !important">
                             <label class="col-form-label s-12 col-md-4 text-right font-weight-bolder"></label>
                             <div class="col-sm-5 row">
                                 <button class="btn btn-success btn-sm ml-3" onclick="pressOnChange()"><i class="icon-filter mr-2"></i>Filter</button>

@@ -22,4 +22,6 @@ Route::group(['middleware' => ['auth']], function () {
     // Pengguna
     Route::resource('pengguna', 'PenggunaController');
     Route::post('pengguna/api', 'PenggunaController@api')->name('pengguna.api');
+    Route::get('pengguna/cek-nik/{nik}', 'PenggunaController@cekNIK')->name('pengguna.cekNIK');
+    Route::post('pengguna/update-status/{id}', 'PenggunaController@updateStatus')->name('pengguna.updateStatus');
 });

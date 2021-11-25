@@ -135,6 +135,16 @@ return [
     |
     */
 
+    // Cek NIK
+    'ip_nik' => env('IP_NIK'),
+    'username_nik' => env('USERNAME_NIK'),
+    'password_nik' => env('PASSWORD_NIK'),
+
+    // SMTP EMAIL
+    'name' => env('APP_NAME', 'Laravel'),
+    'mail_from' => env('MAIL_USERNAME'),
+    'mail_name' => env('MAIL_NAME'),
+
     'providers' => [
 
         /*
