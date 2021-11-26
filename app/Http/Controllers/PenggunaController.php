@@ -43,7 +43,7 @@ class PenggunaController extends Controller
             })
             ->editColumn('status', function ($p) {
                 if ($p->status == 1) {
-                    return "<span class='badge badge-success'>Sudah</span>";
+                    return "<span class='badge badge-success'>Terverifikasi</span>";
                 } elseif ($p->status == 0) {
                     return "<span class='badge badge-warning'>Belum</span>";
                 } elseif ($p->status == 2) {

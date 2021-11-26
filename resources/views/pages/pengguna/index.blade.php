@@ -70,7 +70,7 @@
                                             <th width="20%">NIK</th>
                                             <th width="10%">Status User</th>
                                             <th width="10%">Status Verifikasi</th>
-                                            <th width="10%"></th>
+                                            <th width="10%">Jumlah Aspirasi</th>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
