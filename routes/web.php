@@ -28,4 +28,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Tahapan
     Route::resource('tahapan', 'TahapanController');
     Route::post('tahapan/api', 'TahapanController@api')->name('tahapan.api');
+
+    // Sub Tahapan
+    Route::resource('sub-tahapan', 'SubTahapanController');
+    Route::post('sub-tahapan/api', 'SubTahapanController@api')->name('sub-tahapan.api');
 });

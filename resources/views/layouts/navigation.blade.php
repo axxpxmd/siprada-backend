@@ -19,7 +19,7 @@
             <i class="icon icon-document-text4 text-danger s-18"></i> 
             <span>Tahapan</span>
         </a>
-        <a href="#">
+        <a href="{{ route('sub-tahapan.index') }}">
             <i class="icon icon-document-text4 text-primary s-18"></i> 
             <span>Sub Tahapan</span>
         </a>
