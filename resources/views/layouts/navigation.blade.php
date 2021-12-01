@@ -13,4 +13,29 @@
             <span>User</span>
         </a>
     </li>
+    <li class="header light"><strong>MASTER TAHAPAN</strong></li>
+    <li class="no-b">
+        <a href="{{ route('tahapan.index') }}">
+            <i class="icon icon-document-text4 text-danger s-18"></i> 
+            <span>Tahapan</span>
+        </a>
+        <a href="#">
+            <i class="icon icon-document-text4 text-primary s-18"></i> 
+            <span>Sub Tahapan</span>
+        </a>
+    </li>
+    <li class="header light"><strong>MASTER PERDA</strong></li>
+    <li class="no-b">
+        <a href="#">
+            <i class="icon icon-document-text4 text-warning s-18"></i> 
+            <span>Perda</span>
+        </a>
+    </li>
+    <li class="header light"><strong>MASTER KONSELING</strong></li>
+    <li class="no-b">
+        <a href="#">
+            <i class="icon icon-chat2 text-purple s-18"></i> 
+            <span>Konseling</span>
+        </a>
+    </li>
 </ul>

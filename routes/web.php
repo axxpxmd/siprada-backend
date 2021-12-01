@@ -24,4 +24,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('pengguna/api', 'PenggunaController@api')->name('pengguna.api');
     Route::get('pengguna/cek-nik/{nik}', 'PenggunaController@cekNIK')->name('pengguna.cekNIK');
     Route::post('pengguna/update-status/{id}', 'PenggunaController@updateStatus')->name('pengguna.updateStatus');
+
+    // Tahapan
+    Route::resource('tahapan', 'TahapanController');
+    Route::post('tahapan/api', 'TahapanController@api')->name('tahapan.api');
 });

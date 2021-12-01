@@ -111,7 +111,7 @@
                                             </div>
                                             <div class="form-group mt-1" id="alasan_display">
                                                 <label for="alasan" class="form-control label-input-custom col-md-2">Alasan<span class="text-danger ml-1">*</span></label>
-                                                <textarea type="text" rows="4" name="alasan" id="alasan" class="form-control r-0 light s-12 col-md-4" autocomplete="off">{{ $data->alasan }}</textarea>
+                                                <textarea type="text" rows="4" name="alasan" id="alasan" class="form-control r-0 light s-12 col-md-4" autocomplete="off" placeholder="Alasan Ditolak">{{ $data->alasan }}</textarea>
                                             </div> 
                                             <div class="form-group mt-2">
                                                 <div class="col-md-2"></div>
