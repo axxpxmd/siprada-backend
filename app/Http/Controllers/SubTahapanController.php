@@ -6,8 +6,10 @@ use DataTables;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\SubTahapan;
+
+// Models
 use App\Models\Tahapan;
+use App\Models\SubTahapan;
 
 class SubTahapanController extends Controller
 {

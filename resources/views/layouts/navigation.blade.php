@@ -26,7 +26,7 @@
     </li>
     <li class="header light"><strong>MASTER PERDA</strong></li>
     <li class="no-b">
-        <a href="#">
+        <a href="{{ route('perda.index') }}">
             <i class="icon icon-document-text4 text-warning s-18"></i> 
             <span>Perda</span>
         </a>

@@ -145,6 +145,10 @@ return [
     'mail_from' => env('MAIL_USERNAME'),
     'mail_name' => env('MAIL_NAME'),
 
+    // SFTP
+    'sftp_root' => env('SFTP_ROOT'),
+    'sftp_src' => env('SFTP_SRC'),
+
     'providers' => [
 
         /*

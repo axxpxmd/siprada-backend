@@ -32,4 +32,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Sub Tahapan
     Route::resource('sub-tahapan', 'SubTahapanController');
     Route::post('sub-tahapan/api', 'SubTahapanController@api')->name('sub-tahapan.api');
+
+    // Perda 
+    Route::resource('perda', 'PerdaController');
+    Route::post('perda/api', 'PerdaController@api')->name('perda.api');
 });
