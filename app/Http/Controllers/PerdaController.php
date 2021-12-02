@@ -6,7 +6,7 @@ use DataTables;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Histori;
 // Models
 use App\Models\Perda;
 use App\Models\SubTahapan;
@@ -52,6 +52,19 @@ class PerdaController extends Controller
                 } else {
                     return 'Tidak';
                 }
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action', 'judul'])
+            ->toJson();
+    }
+
+    public function api2()
+    {
+        $data = Histori::all();
+
+        return DataTables::of($data)
+            ->addColumn('action', function ($p) {
+                return "<a href='" . route($this->route . 'edit', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
             })
             ->addIndexColumn()
             ->rawColumns(['action', 'judul'])

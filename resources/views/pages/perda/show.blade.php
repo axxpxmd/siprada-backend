@@ -102,6 +102,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card mt-2">
+                            <h6 class="card-header"><strong>Rekam Jejak</strong></h6>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <th width="10%">No</th>
+                                            <th width="10%">Tahap</th>
+                                            <th width="10%">Sub Tahap</th>
+                                            <th width="40%">Judul</th>
+                                            <th width="10%">Tanggal Kegiatan</th>
+                                            <th width="10%">Keterangan</th>
+                                            <th width="10%"></th>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,6 +130,25 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-
+    var table = $('#dataTable').dataTable({
+        scrollX: true,
+        processing: true,
+        serverSide: true,
+        order: [ 0, 'asc' ],
+        pageLength: 25,
+        ajax: {
+            url: "{{ route($route.'api2') }}",
+            method: 'POST'
+        },
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
+            {data: 'tahap_id', name: 'tahap_id'},
+            {data: 'sub_tahap_id', name: 'sub_tahap_id'},
+            {data: 'judul', name: 'judul'},
+            {data: 'tgl_kegiatan', name: 'tgl_kegiatan'},
+            {data: 'keterangan', name: 'keterangan'},
+            {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
+        ]
+    });
 </script>
 @endsection

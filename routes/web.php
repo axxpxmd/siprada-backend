@@ -36,4 +36,5 @@ Route::group(['middleware' => ['auth']], function () {
     // Perda 
     Route::resource('perda', 'PerdaController');
     Route::post('perda/api', 'PerdaController@api')->name('perda.api');
+    Route::post('perda/api2', 'PerdaController@api2')->name('perda.api2');
 });
