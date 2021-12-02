@@ -34,13 +34,16 @@ class PerdaController extends Controller
         ));
     }
 
-    public function api()
+    public function api(Request $request)
     {
-        $data = Perda::all();
+        $jenis = $request->jenis_filter;
+        $tahun_angrn = $request->tahun_angrn_filter;
+
+        $data = Perda::perda($jenis, $tahun_angrn);
 
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
-                return "<a href='#' onclick='edit(" . $p->id . ")' title='Edit Permission'><i class='icon-pencil mr-1'></i></a>";
+                return "<a href='" . route($this->route . 'edit', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
             })
             ->editColumn('judul', function ($p) {
                 return "<a href='" . route($this->route . 'show', $p->id) . "' class='text-primary' title='Menampilkan Data'>" . $p->judul . "</a>";
@@ -76,12 +79,6 @@ class PerdaController extends Controller
             'tgl_terbit' => 'required'
         ]);
 
-        /* Tahapan : 
-         * 1. tm_perdas
-         * 2. tm_historis
-         */
-
-        // Tahap 1
         $file     = $request->file('dokumen');
         $fileName = time() . "." . $file->getClientOriginalName();
         $request->file('dokumen')->storeAs('perda/', $fileName, 'sftp', 'public');
@@ -108,6 +105,77 @@ class PerdaController extends Controller
 
         return response()->json([
             'message' => "Data " . $this->title . " berhasil tersimpan."
+        ]);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $route = $this->route;
+        $title = $this->title;
+
+        $tahaps = Tahapan::select('id', 'judul')->get();
+        $sub_tahaps = SubTahapan::select('id', 'judul')->get();
+
+        $data = Perda::find($id);
+
+        return view($this->view . 'edit', compact(
+            'route',
+            'title',
+            'tahaps',
+            'sub_tahaps',
+            'data'
+        ));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'judul' => 'required|string|max:500|unique:tm_perdas,judul,' . $id,
+            'jenis' => 'required',
+            'perda_amandemen' => 'max:500',
+            'periode1' => 'required',
+            'periode2' => 'required',
+            'tahun_angrn' => 'required',
+            'pengusul' => 'required',
+            'pemrakarsa' => 'required',
+            'tgl_inpt_dok' => 'required',
+            'tgl_terbit' => 'required'
+        ]);
+
+        $data = Perda::find($id);
+        $fileName = $data->dokumen;
+
+        if ($request->dokumen != null) {
+            $request->validate([
+                'dokumen' => 'required|mimes:png,jpeg,jpg,pdf|max:2024',
+            ]);
+
+            $file     = $request->file('dokumen');
+            $fileName = time() . "." . $file->getClientOriginalName();
+            $request->file('dokumen')->storeAs('perda/', $fileName, 'sftp', 'public');
+        }
+
+        $data->update([
+            'tahap_id' => 1,
+            'sub_tahap_id' => 1,
+            'judul' => $request->judul,
+            'jenis' => $request->jenis,
+            'perda_amandemen' => $request->perda_amandemen,
+            'periode' => $request->periode1 . ' - ' . $request->periode2,
+            'tahun_angrn' => $request->tahun_angrn,
+            'pengusul' => $request->pengusul,
+            'pemrakarsa' => $request->pemrakarsa,
+            'dokumen' => $fileName,
+            'tgl_inpt_dok' => $request->tgl_inpt_dok,
+            'naskah_akdmk' => $request->naskah_akdmk,
+            'keterangan' => $request->keterangan,
+            'ditarik' => 'tidak',
+            'tampilkan' => 1,
+            'tgl_terbit' => $request->tgl_terbit
+        ]);
+
+        return response()->json([
+            'message' => 'Data ' . $this->title . ' berhasil diperbaharui.'
         ]);
     }
 }

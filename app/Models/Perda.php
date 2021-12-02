@@ -18,4 +18,22 @@ class Perda extends Model
     {
         return $this->belongsTo(SubTahapan::class, 'sub_tahap_id');
     }
+
+    /**
+     * QUERY
+     */
+    public static function perda($jenis, $tahun_angrn)
+    {
+        $data = Perda::orderBy('id', 'DESC');
+
+        if ($jenis != null) {
+            $data->where('jenis', $jenis);
+        }
+
+        if ($tahun_angrn != null) {
+            $data->where('tahun_angrn', $tahun_angrn);
+        }
+
+        return $data->get();
+    }
 }

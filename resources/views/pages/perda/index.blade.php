@@ -40,19 +40,32 @@
                 <div class="card no-b mb-2">
                     <div class="card-body">
                         <div class="form-group row" style="margin-top: -10px !important">
-                            <label for="status_ttd" class="col-form-label s-12 col-md-4 text-right font-weight-bolder">Jenis : </label>
+                            <label for="jenis_filter" class="col-form-label s-12 col-md-4 text-right font-weight-bolder">Jenis : </label>
                             <div class="col-sm-4">
-                                <select name="status_ttd" id="status_ttd" class="select2 form-control r-0 light s-12">
-                                    <option value=""></option>
+                                <select name="jenis_filter" id="jenis_filter" class="select2 form-control r-0 light s-12">
+                                    <option value="">Pilih</option>
+                                    <option value="baru">Baru</option>
+                                    <option value="amandemen">Amandemen</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row" style="margin-top: -10px !important">
-                            <label for="status_ttd" class="col-form-label s-12 col-md-4 text-right font-weight-bolder">Tahun Anggaran : </label>
+                            <label for="tahun_angrn_filter" class="col-form-label s-12 col-md-4 text-right font-weight-bolder">Tahun Anggaran : </label>
                             <div class="col-sm-4">
-                                <select name="status_ttd" id="status_ttd" class="select2 form-control r-0 light s-12">
+                                <select name="tahun_angrn_filter" id="tahun_angrn_filter" class="select2 form-control r-0 light s-12">
                                     <option value=""></option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin-top: -8px !important">
+                            <label class="col-form-label s-12 col-md-4 text-right font-weight-bolder"></label>
+                            <div class="col-sm-5 row">
+                                <button class="btn btn-success btn-sm ml-3" onclick="pressOnChange()"><i class="icon-filter mr-2"></i>Filter</button>
                             </div>
                         </div>
                     </div>
@@ -118,17 +131,17 @@
                                                     </div>
                                                     <div class="form-group mt-1">
                                                         <label class="form-control label-input-custom col-md-4 font-weight-normal">Periode<span class="text-danger ml-1">*</span></label>
-                                                        <input type="number" name="periode1" id="periode1" placeholder="" class="form-control r-0 light s-12 col-md-2" autocomplete="off" required/>
+                                                        <input type="number" name="periode1" id="periode1" class="form-control r-0 light s-12 col-md-2" autocomplete="off" required/>
                                                         <span>&nbsp;&nbsp; - &nbsp;&nbsp;</span>
-                                                        <input type="number" name="periode2" id="periode2" placeholder="" class="form-control r-0 light s-12 col-md-2" autocomplete="off" required/>
+                                                        <input type="number" name="periode2" id="periode2" class="form-control r-0 light s-12 col-md-2" autocomplete="off" required/>
                                                     </div>
                                                     <div class="form-group m-0">
                                                         <label for="tahun_angrn" class="form-control label-input-custom col-md-4 font-weight-normal">Tahun Anggaran<span class="text-danger ml-1">*</span></label>
-                                                        <input type="number" name="tahun_angrn" id="tahun_angrn" placeholder="" class="form-control r-0 light s-12 col-md-2" autocomplete="off" required/>
+                                                        <input type="number" name="tahun_angrn" id="tahun_angrn" class="form-control r-0 light s-12 col-md-2" autocomplete="off" required/>
                                                     </div>
                                                     <div class="form-group m-0">
                                                         <label for="pengusul" class="form-control label-input-custom col-md-4 font-weight-normal">Pengusul<span class="text-danger ml-1">*</span></label>
-                                                        <input type="text" name="pengusul" id="pengusul" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                                        <input type="text" name="pengusul" id="pengusul" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                                     </div>
                                                     <div class="form-group m-0">
                                                         <label for="pemrakarsa" class="form-control label-input-custom col-md-4 font-weight-normal">Pemrakarsa<span class="text-danger ml-1">*</span></label>
@@ -144,11 +157,11 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group m-0">
                                                         <label for="dokumen" class="form-control label-input-custom col-md-4 font-weight-normal">Dokumen<span class="text-danger ml-1">*</span></label>
-                                                        <input type="file" name="dokumen" id="dokumen" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                                        <input type="file" name="dokumen" id="dokumen" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                                     </div>
                                                     <div class="form-group m-0">
                                                         <label for="tgl_inpt_dok" class="form-control label-input-custom col-md-4 font-weight-normal">Tgl Input Dok.<span class="text-danger ml-1">*</span></label>
-                                                        <input type="datetime-local" name="tgl_inpt_dok" id="tgl_inpt_dok" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                                        <input type="datetime-local" name="tgl_inpt_dok" id="tgl_inpt_dok" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                                     </div>
                                                     <div class="form-group m-0">
                                                         <label for="naskah_akdmk" class="form-control label-input-custom col-md-4 font-weight-normal">Naskah Akademik</label>
@@ -160,22 +173,16 @@
                                                     </div>
                                                     <div class="form-group m-0">
                                                         <label for="tgl_terbit" class="form-control label-input-custom col-md-4 font-weight-normal">Tanggal Terbit<span class="text-danger ml-1">*</span></label>
-                                                        <input type="datetime-local" name="tgl_terbit" id="tgl_terbit" placeholder="" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
+                                                        <input type="datetime-local" name="tgl_terbit" id="tgl_terbit" class="form-control r-0 light s-12 col-md-8" autocomplete="off" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group mt-1">
+                                                    <div class="form-group mt-2">
                                                         <div class="col-md-4"></div>
                                                         <button type="submit" class="btn btn-primary btn-sm"><i class="icon-save mr-2"></i>Simpan</button>
                                                     </div>  
-                                                </div>
-                                                <div class="col-md-6">
                                                 </div>
                                             </div>
                                         </div>
@@ -219,7 +226,11 @@
         pageLength: 25,
         ajax: {
             url: "{{ route($route.'api') }}",
-            method: 'POST'
+            method: 'POST',
+            data: function (data) {
+                data.jenis_filter = $('#jenis_filter').val();
+                data.tahun_angrn_filter = $('#tahun_angrn_filter').val();
+            }
         },
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
