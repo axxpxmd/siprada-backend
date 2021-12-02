@@ -53,7 +53,7 @@
                             <label for="tahun_angrn_filter" class="col-form-label s-12 col-md-4 text-right font-weight-bolder">Tahun Anggaran : </label>
                             <div class="col-sm-4">
                                 <select name="tahun_angrn_filter" id="tahun_angrn_filter" class="select2 form-control r-0 light s-12">
-                                    <option value=""></option>
+                                    <option value="">Pilih</option>
                                     <option value="2018">2018</option>
                                     <option value="2019">2019</option>
                                     <option value="2020">2020</option>

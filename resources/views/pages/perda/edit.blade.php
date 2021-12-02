@@ -17,8 +17,8 @@
             <div class="row p-t-b-10 ">
                 <div class="col">
                     <h4>
-                        <i class="icon icon-document-list mr-2"></i>
-                        Edit {{ $title }} | {{ $data->nm_wajib_pajak }}
+                        <i class="icon icon-document-text4 mr-2"></i>
+                        Edit {{ $title }}
                     </h4>
                 </div>
             </div>

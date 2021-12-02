@@ -23,14 +23,9 @@ class PerdaController extends Controller
         $route = $this->route;
         $title = $this->title;
 
-        $tahaps = Tahapan::select('id', 'judul')->get();
-        $sub_tahaps = SubTahapan::select('id', 'judul')->get();
-
         return view($this->view . 'index', compact(
             'route',
-            'title',
-            'tahaps',
-            'sub_tahaps'
+            'title'
         ));
     }
 
@@ -108,21 +103,30 @@ class PerdaController extends Controller
         ]);
     }
 
-    public function edit(Request $request, $id)
+    public function show($id)
     {
         $route = $this->route;
         $title = $this->title;
 
-        $tahaps = Tahapan::select('id', 'judul')->get();
-        $sub_tahaps = SubTahapan::select('id', 'judul')->get();
+        $data = Perda::find($id);
+
+        return view($this->view . 'show', compact(
+            'route',
+            'title',
+            'data'
+        ));
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $route = $this->route;
+        $title = $this->title;
 
         $data = Perda::find($id);
 
         return view($this->view . 'edit', compact(
             'route',
             'title',
-            'tahaps',
-            'sub_tahaps',
             'data'
         ));
     }
