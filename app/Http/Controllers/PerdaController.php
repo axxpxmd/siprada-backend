@@ -43,8 +43,8 @@ class PerdaController extends Controller
             ->editColumn('judul', function ($p) {
                 return "<a href='" . route($this->route . 'show', $p->id) . "' class='text-primary' title='Menampilkan Data'>" . $p->judul . "</a>";
             })
-            ->editColumn('tahap_id', function ($p) {
-                return $p->tahap->judul;
+            ->editColumn('sub_tahap_id', function ($p) {
+                return $p->subTahap == null ? 'Belum ada' : $p->subTahap->judul;
             })
             ->editColumn('tampilkan', function ($p) {
                 if ($p->tampilkan == 1) {

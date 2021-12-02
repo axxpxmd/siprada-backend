@@ -84,7 +84,7 @@
                                             <th width="5%">Anggaran</th>
                                             <th width="8%">Pengusul</th>
                                             <th width="7%">Pemrakarsa</th>
-                                            <th width="10%">Tahap</th>
+                                            <th width="10%">Tahapan</th>
                                             <th width="5%">Ditarik</th>
                                             <th width="5%">Tampilkan</th>
                                             <th width="5%"></th>
@@ -240,7 +240,7 @@
             {data: 'tahun_angrn', name: 'tahun_angrn'},
             {data: 'pengusul', name: 'pengusul'},
             {data: 'pemrakarsa', name: 'pemrakarsa'},
-            {data: 'tahap_id', name: 'tahap_id'},
+            {data: 'sub_tahap_id', name: 'sub_tahap_id'},
             {data: 'ditarik', name: 'ditarik', className: 'text-center'},
             {data: 'tampilkan', name: 'tampilkan', className: 'text-center'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}

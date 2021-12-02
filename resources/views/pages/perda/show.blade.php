@@ -55,11 +55,11 @@
                                     </div>
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Tahap :</strong></label>
-                                        <label class="col-md-10 s-12">{{ $data->tahap->judul }}</label>
+                                        <label class="col-md-10 s-12">{{ $data->tahap == null ? 'Belum ada' : $data->tahap->judul }}</label>
                                     </div>
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Sub Tahap :</strong></label>
-                                        <label class="col-md-10 s-12">{{ $data->subTahap->judul }}</label>
+                                        <label class="col-md-10 s-12">{{ $data->subTahap == null ? 'Belum ada' : $data->subTahap->judul }}</label>
                                     </div>
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Pengusul :</strong></label>
