@@ -62,18 +62,19 @@
                         <div class="card no-b">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="dataTable" class="table display nowrap table-striped table-bordered" style="width:100%">
+                                    <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
-                                            <th>No</th>
-                                            <th>Judul</th>
-                                            <th>Jenis</th>
-                                            <th>Periode</th>
-                                            <th>Thn Anggrn</th>
-                                            <th>Pengusul</th>
-                                            <th>Pemrakarsa</th>
-                                            <th>Tahap</th>
-                                            <th>Ditarik</th>
-                                            <th>Tampilkan</th>
+                                            <th width="5%">No</th>
+                                            <th width="35%">Judul</th>
+                                            <th width="7%">Jenis</th>
+                                            <th width="8%">Periode</th>
+                                            <th width="5%">Anggaran</th>
+                                            <th width="8%">Pengusul</th>
+                                            <th width="7%">Pemrakarsa</th>
+                                            <th width="10%">Tahap</th>
+                                            <th width="5%">Ditarik</th>
+                                            <th width="5%">Tampilkan</th>
+                                            <th width="5%"></th>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
@@ -229,8 +230,9 @@
             {data: 'pengusul', name: 'pengusul'},
             {data: 'pemrakarsa', name: 'pemrakarsa'},
             {data: 'tahap_id', name: 'tahap_id'},
-            {data: 'ditarik', name: 'ditarik', orderable: false, searchable: false, className: 'text-center'},
-            {data: 'tampilkan', name: 'tampilkan', orderable: false, searchable: false, className: 'text-center'}
+            {data: 'ditarik', name: 'ditarik', className: 'text-center'},
+            {data: 'tampilkan', name: 'tampilkan', className: 'text-center'},
+            {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
     });
 

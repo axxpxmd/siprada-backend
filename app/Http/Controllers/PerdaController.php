@@ -40,15 +40,23 @@ class PerdaController extends Controller
 
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
-                return "
-                <a href='#' onclick='edit(" . $p->id . ")' title='Edit Permission'><i class='icon-pencil mr-1'></i></a>
-                <a href='#' onclick='remove(" . $p->id . ")' class='text-danger mr-2' title='Hapus Permission'><i class='icon icon-remove'></i></a>";
+                return "<a href='#' onclick='edit(" . $p->id . ")' title='Edit Permission'><i class='icon-pencil mr-1'></i></a>";
+            })
+            ->editColumn('judul', function ($p) {
+                return "<a href='" . route($this->route . 'show', $p->id) . "' class='text-primary' title='Menampilkan Data'>" . $p->judul . "</a>";
             })
             ->editColumn('tahap_id', function ($p) {
                 return $p->tahap->judul;
             })
+            ->editColumn('tampilkan', function ($p) {
+                if ($p->tampilkan == 1) {
+                    return 'Ya';
+                } else {
+                    return 'Tidak';
+                }
+            })
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'judul'])
             ->toJson();
     }
 
