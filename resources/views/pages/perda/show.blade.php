@@ -107,16 +107,17 @@
                         </div>
                         <div class="card mt-2">
                             <h6 class="card-header"><strong>Rekam Jejak</strong></h6>
-                            <div class="card-body">
+                            <div class="card-body no-b">
                                 <div class="table-responsive">
                                     <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <th width="5%">No</th>
                                             <th width="10%">Tahapan</th>
                                             <th width="10%">Sub Tahapan</th>
-                                            <th width="35%">Judul</th>
+                                            <th width="30%">Judul</th>
                                             <th width="25%">Keterangan</th>
                                             <th width="10%">Tanggal Kegiatan</th>
+                                            <th width="5%">File</th>
                                             <th width="5%"></th>
                                         </thead>
                                         <tbody></tbody>
@@ -235,6 +236,7 @@
             {data: 'judul', name: 'judul'},
             {data: 'keterangan', name: 'keterangan'},
             {data: 'tgl_kegiatan', name: 'tgl_kegiatan'},
+            {data: 'file', name: 'file', className: 'text-center'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
     });

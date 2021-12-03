@@ -78,8 +78,13 @@ class PerdaController extends Controller
             ->editColumn('tgl_kegiatan', function ($p) {
                 return Carbon::createFromFormat('Y-m-d H:i:s', $p->tgl_kegiatan)->format('d M Y | H:i:s');
             })
+            ->addColumn('file', function ($p) {
+                $totalFile = HistoriFile::where('histori_id', $p->id)->count();
+
+                return "<a href='#' class='text-primary' title='Menampilkan File'>" . $totalFile . ' File' . "</a>";
+            })
             ->addIndexColumn()
-            ->rawColumns(['action', 'judul'])
+            ->rawColumns(['action', 'judul', 'file'])
             ->toJson();
     }
 
@@ -104,8 +109,8 @@ class PerdaController extends Controller
         $request->file('dokumen')->storeAs('perda/', $fileName, 'sftp', 'public');
 
         $dataPerda = [
-            'tahap_id' => 1,
-            'sub_tahap_id' => 1,
+            'tahap_id' => 0,
+            'sub_tahap_id' => 0,
             'judul' => $request->judul,
             'jenis' => $request->jenis,
             'perda_amandemen' => $request->perda_amandemen,
@@ -164,6 +169,13 @@ class PerdaController extends Controller
             'tgl_kegiatan' => 'required'
         ]);
 
+        /* Tahapan : 
+         * tm_historis
+         * tm_perdas
+         * tr_histori_files
+         */
+
+        // Tahap 1
         $data = new Histori();
         $data->perda_id = $request->perda_id;
         $data->tahap_id = $request->tahap_id;
@@ -174,19 +186,27 @@ class PerdaController extends Controller
         $data->keterangan = $request->keterangan;
         $data->save();
 
+        // Tahap 2
+        $perda = Perda::find($request->perda_id);
+        $perda->update([
+            'tahap_id' => $request->tahap_id,
+            'sub_tahap_id' => $request->sub_tahap_id
+        ]);
+
+        // Tahap 3
         $checkFile = $request->hasFile('file');
         if ($checkFile) {
             $countFile = count($request->file('file'));
             for ($k = 0; $k < $countFile; $k++) {
 
-                // Saved to Storage
+                //TODO: Saved to Storage
                 $file = $request->file('file');
                 $fileName = time() . "." . $file[$k]->getClientOriginalName();
                 if ($file[$k] != null) {
                     $file[$k]->storeAs('perda/', $fileName, 'sftp', 'public');
                 }
 
-                // Saved to Table
+                //TODO: Saved to Table
                 $inputFile = new HistoriFile();
                 $inputFile->histori_id = $data->id;
                 $inputFile->file = $fileName;
