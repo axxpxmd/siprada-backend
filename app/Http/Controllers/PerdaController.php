@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use DataTables;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Histori;
+
 // Models
 use App\Models\Perda;
-use App\Models\SubTahapan;
+use App\Models\Histori;
 use App\Models\Tahapan;
+use App\Models\HistoriFile;
+use App\Models\SubTahapan;
 
 class PerdaController extends Controller
 {
@@ -65,6 +68,15 @@ class PerdaController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
                 return "<a href='" . route($this->route . 'edit', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
+            })
+            ->editColumn('tahap_id', function ($p) {
+                return $p->tahap->judul;
+            })
+            ->editColumn('sub_tahap_id', function ($p) {
+                return $p->subTahap->judul;
+            })
+            ->editColumn('tgl_kegiatan', function ($p) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $p->tgl_kegiatan)->format('d M Y | H:i:s');
             })
             ->addIndexColumn()
             ->rawColumns(['action', 'judul'])
@@ -123,11 +135,68 @@ class PerdaController extends Controller
 
         $data = Perda::find($id);
 
+        $tahaps = Tahapan::select('id', 'judul')->get();
+        $sub_tahaps = SubTahapan::select('id', 'judul')->get();
+
         return view($this->view . 'show', compact(
             'route',
             'title',
-            'data'
+            'data',
+            'tahaps',
+            'sub_tahaps'
         ));
+    }
+
+    public function subTahapanByTahapan($id)
+    {
+        $data = SubTahapan::where('tahap_id', $id)->get();
+
+        return $data;
+    }
+
+    public function storeRekamJejak(Request $request)
+    {
+        $request->validate([
+            'tahap_id' => 'required',
+            'sub_tahap_id' => 'required',
+            'perda_id' => 'required',
+            'status_kegiatan' => 'required',
+            'tgl_kegiatan' => 'required'
+        ]);
+
+        $data = new Histori();
+        $data->perda_id = $request->perda_id;
+        $data->tahap_id = $request->tahap_id;
+        $data->sub_tahap_id = $request->sub_tahap_id;
+        $data->judul = $request->judul;
+        $data->status_kegiatan = $request->status_kegiatan;
+        $data->tgl_kegiatan = $request->tgl_kegiatan;
+        $data->keterangan = $request->keterangan;
+        $data->save();
+
+        $checkFile = $request->hasFile('file');
+        if ($checkFile) {
+            $countFile = count($request->file('file'));
+            for ($k = 0; $k < $countFile; $k++) {
+
+                // Saved to Storage
+                $file = $request->file('file');
+                $fileName = time() . "." . $file[$k]->getClientOriginalName();
+                if ($file[$k] != null) {
+                    $file[$k]->storeAs('perda/', $fileName, 'sftp', 'public');
+                }
+
+                // Saved to Table
+                $inputFile = new HistoriFile();
+                $inputFile->histori_id = $data->id;
+                $inputFile->file = $fileName;
+                $inputFile->save();
+            }
+        }
+
+        return response()->json([
+            'message' => 'Data Rekam Jejak berhasil ditambah.'
+        ]);
     }
 
     public function edit(Request $request, $id)

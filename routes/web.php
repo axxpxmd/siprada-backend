@@ -37,4 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('perda', 'PerdaController');
     Route::post('perda/api', 'PerdaController@api')->name('perda.api');
     Route::post('perda/api2', 'PerdaController@api2')->name('perda.api2');
+    Route::get('perda/get-sub-tahapan/{id}', 'PerdaController@subTahapanByTahapan')->name('perda.subTahapanByTahapan');
+    Route::post('perda/rekam-jejak', 'PerdaController@storeRekamJejak')->name('perda.storeRekamJejak');
 });
