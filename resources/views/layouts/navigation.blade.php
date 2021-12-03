@@ -31,11 +31,17 @@
             <span>Perda</span>
         </a>
     </li>
-    <li class="header light"><strong>MASTER KONSELING</strong></li>
+    <li class="header light"><strong>MASTER DATA</strong></li>
     <li class="no-b">
         <a href="#">
             <i class="icon icon-chat2 text-purple s-18"></i> 
             <span>Konseling</span>
+        </a>
+    </li>
+    <li class="no-b">
+        <a href="#">
+            <i class="icon icon-document-text4 text-success s-18"></i> 
+            <span>Aspirasi</span>
         </a>
     </li>
 </ul>
