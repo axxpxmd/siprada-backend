@@ -81,7 +81,8 @@ class PerdaController extends Controller
             ->addColumn('file', function ($p) {
                 $totalFile = HistoriFile::where('histori_id', $p->id)->count();
 
-                return "<a href='#' class='text-primary' title='Menampilkan File'>" . $totalFile . ' File' . "</a>";
+                return $totalFile;
+                // return "<a href='#' class='text-primary' title='Menampilkan File'>" . $totalFile . ' File' . "</a>";
             })
             ->addIndexColumn()
             ->rawColumns(['action', 'judul', 'file'])
