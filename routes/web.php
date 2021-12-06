@@ -38,5 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('perda/api', 'PerdaController@api')->name('perda.api');
     Route::post('perda/api2', 'PerdaController@api2')->name('perda.api2');
     Route::get('perda/get-sub-tahapan/{id}', 'PerdaController@subTahapanByTahapan')->name('perda.subTahapanByTahapan');
-    Route::post('perda/rekam-jejak', 'PerdaController@storeRekamJejak')->name('perda.storeRekamJejak');
+    Route::post('perda/simpan-rekam-jejak', 'PerdaController@storeRekamJejak')->name('perda.storeRekamJejak');
+    Route::get('perda/edit-rekam-jejak/{id}', 'PerdaController@editRekamJejak')->name('perda.editRekamJejak');
+    Route::post('perda/update-rekam-jejak/{id}', 'PerdaController@updateRekamJejak')->name('perda.updateRekamJejak');
+    Route::get('delete-file-rekam-jejak', 'PerdaController@deleteFileRekamJejak')->name('perda.deleteFileRekamJejak');
 });

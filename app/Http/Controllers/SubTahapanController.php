@@ -51,18 +51,22 @@ class SubTahapanController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'tahap_id' => 'required',
-            'judul' => 'required|unique:tm_sub_tahaps,judul',
-            'keterangan' => 'required'
-        ]);
+        // $request->validate([
+        //     'tahap_id' => 'required',
+        //     'judul' => 'required|unique:tm_sub_tahaps,judul',
+        //     'keterangan' => 'required'
+        // ]);
 
-        $data = $request->all();
-        SubTahapan::create($data);
+        // $data = $request->all();
+        // SubTahapan::create($data);
+
+        // return response()->json([
+        //     'message' => 'Data ' . $this->title . ' berhasil tersimpan.'
+        // ]);
 
         return response()->json([
-            'message' => 'Data ' . $this->title . ' berhasil tersimpan.'
-        ]);
+            'message' => 'Tidak bisa menambah data, Silahkan edit.'
+        ], 422);
     }
 
     public function edit($id)

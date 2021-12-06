@@ -33,9 +33,7 @@ class TahapanController extends Controller
 
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
-                return "
-                <a href='#' onclick='edit(" . $p->id . ")' title='Edit Permission'><i class='icon-pencil mr-1'></i></a>
-                <a href='#' onclick='remove(" . $p->id . ")' class='text-danger mr-2' title='Hapus Permission'><i class='icon icon-remove'></i></a>";
+                return "<a href='#' onclick='edit(" . $p->id . ")' title='Edit Permission'><i class='icon-pencil mr-1'></i></a>";
             })
             ->addIndexColumn()
             ->rawColumns(['action'])
@@ -44,16 +42,20 @@ class TahapanController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'judul' => 'required|unique:tm_tahaps,judul',
-        ]);
+        // $request->validate([
+        //     'judul' => 'required|unique:tm_tahaps,judul',
+        // ]);
 
-        $data = $request->all();
-        Tahapan::create($data);
+        // $data = $request->all();
+        // Tahapan::create($data);
+
+        // return response()->json([
+        //     'message' => 'Data ' . $this->title . ' berhasil tersimpan.'
+        // ]);
 
         return response()->json([
-            'message' => 'Data ' . $this->title . ' berhasil tersimpan.'
-        ]);
+            'message' => 'Tidak bisa menambah data, Silahkan edit.'
+        ], 422);
     }
 
     public function edit($id)

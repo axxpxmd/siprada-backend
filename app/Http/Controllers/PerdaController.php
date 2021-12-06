@@ -67,7 +67,7 @@ class PerdaController extends Controller
 
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
-                return "<a href='" . route($this->route . 'edit', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
+                return "<a href='" . route($this->route . 'editRekamJejak', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
             })
             ->editColumn('tahap_id', function ($p) {
                 return $p->tahap->judul;
@@ -159,66 +159,6 @@ class PerdaController extends Controller
         return $data;
     }
 
-    public function storeRekamJejak(Request $request)
-    {
-        $request->validate([
-            'tahap_id' => 'required',
-            'sub_tahap_id' => 'required',
-            'perda_id' => 'required',
-            'status_kegiatan' => 'required',
-            'tgl_kegiatan' => 'required'
-        ]);
-
-        /* Tahapan : 
-         * tm_historis
-         * tm_perdas
-         * tr_histori_files
-         */
-
-        // Tahap 1
-        $data = new Histori();
-        $data->perda_id = $request->perda_id;
-        $data->tahap_id = $request->tahap_id;
-        $data->sub_tahap_id = $request->sub_tahap_id;
-        $data->judul = $request->judul;
-        $data->status_kegiatan = $request->status_kegiatan;
-        $data->tgl_kegiatan = $request->tgl_kegiatan;
-        $data->keterangan = $request->keterangan;
-        $data->save();
-
-        // Tahap 2
-        $perda = Perda::find($request->perda_id);
-        $perda->update([
-            'tahap_id' => $request->tahap_id,
-            'sub_tahap_id' => $request->sub_tahap_id
-        ]);
-
-        // Tahap 3
-        $checkFile = $request->hasFile('file');
-        if ($checkFile) {
-            $countFile = count($request->file('file'));
-            for ($k = 0; $k < $countFile; $k++) {
-
-                //TODO: Saved to Storage
-                $file = $request->file('file');
-                $fileName = time() . "." . $file[$k]->getClientOriginalName();
-                if ($file[$k] != null) {
-                    $file[$k]->storeAs('perda/', $fileName, 'sftp', 'public');
-                }
-
-                //TODO: Saved to Table
-                $inputFile = new HistoriFile();
-                $inputFile->histori_id = $data->id;
-                $inputFile->file = $fileName;
-                $inputFile->save();
-            }
-        }
-
-        return response()->json([
-            'message' => 'Data Rekam Jejak berhasil ditambah.'
-        ]);
-    }
-
     public function edit(Request $request, $id)
     {
         $route = $this->route;
@@ -283,5 +223,133 @@ class PerdaController extends Controller
         return response()->json([
             'message' => 'Data ' . $this->title . ' berhasil diperbaharui.'
         ]);
+    }
+
+    public function storeRekamJejak(Request $request)
+    {
+        $request->validate([
+            'tahap_id' => 'required',
+            'sub_tahap_id' => 'required',
+            'perda_id' => 'required',
+            'status_kegiatan' => 'required',
+            'tgl_kegiatan' => 'required'
+        ]);
+
+        /* Tahapan : 
+         * tm_historis
+         * tm_perdas
+         * tr_histori_files
+         */
+
+        // Tahap 1
+        $data = new Histori();
+        $data->perda_id = $request->perda_id;
+        $data->tahap_id = $request->tahap_id;
+        $data->sub_tahap_id = $request->sub_tahap_id;
+        $data->judul = $request->judul;
+        $data->status_kegiatan = $request->status_kegiatan;
+        $data->tgl_kegiatan = $request->tgl_kegiatan;
+        $data->keterangan = $request->keterangan;
+        $data->save();
+
+        // Tahap 2
+        $perda = Perda::find($request->perda_id);
+        $perda->update([
+            'tahap_id' => $request->tahap_id,
+            'sub_tahap_id' => $request->sub_tahap_id
+        ]);
+
+        // Tahap 3
+        $checkFile = $request->hasFile('file');
+        if ($checkFile) {
+            $countFile = count($request->file('file'));
+            for ($k = 0; $k < $countFile; $k++) {
+
+                //TODO: Saved to Storage
+                $file = $request->file('file');
+                $fileName = time() . "." . $file[$k]->getClientOriginalName();
+                if ($file[$k] != null) {
+                    $file[$k]->storeAs('perda/', $fileName, 'sftp', 'public');
+                }
+
+                //TODO: Saved to Table
+                $inputFile = new HistoriFile();
+                $inputFile->histori_id = $data->id;
+                $inputFile->file = $fileName;
+                $inputFile->save();
+            }
+        }
+
+        return response()->json([
+            'message' => 'Data Rekam Jejak berhasil ditambah.'
+        ]);
+    }
+
+    public function editRekamJejak($id)
+    {
+        $route = $this->route;
+        $title = 'Rekam Jejak';
+
+        $data = Histori::find($id);
+        $files = HistoriFile::where('histori_id', $id)->get();
+
+        return view($this->view . 'edit-rekam-jejak', compact(
+            'route',
+            'title',
+            'data',
+            'files'
+        ));
+    }
+
+    public function updateRekamJejak(Request $request, $id)
+    {
+        /* Tahapan : 
+         * tm_historis
+         * tr_histori_files
+         */
+
+        // Tahap 1
+        $data = Histori::find($id);
+        $data->update([
+            'judul' => $request->judul,
+            'tgl_kegiatan' => $request->tgl_kegiatan,
+            'keterangan' => $request->keterangan
+        ]);
+
+        // Tahap 2
+        $checkFile = $request->hasFile('file');
+        if ($checkFile) {
+            $countFile = count($request->file('file'));
+            for ($k = 0; $k < $countFile; $k++) {
+
+                //TODO: Saved to Storage
+                $file = $request->file('file');
+                $fileName = time() . "." . $file[$k]->getClientOriginalName();
+                if ($file[$k] != null) {
+                    $file[$k]->storeAs('perda/', $fileName, 'sftp', 'public');
+                }
+
+                //TODO: Saved to Table
+                $inputFile = new HistoriFile();
+                $inputFile->histori_id = $data->id;
+                $inputFile->file = $fileName;
+                $inputFile->save();
+            }
+        }
+
+        return response()->json([
+            'message' => 'Data Rekam Jejak berhasil diperbaharui.'
+        ]);
+    }
+
+    public function deleteFileRekamJejak(Request $request)
+    {
+        $data = HistoriFile::find($request->id);
+
+        $data->delete();
+
+        return redirect()
+            ->route('perda.editRekamJejak', $data->histori_id)
+            ->withSuccess('BERHASIL! File berhasil terhapus.');
     }
 }
