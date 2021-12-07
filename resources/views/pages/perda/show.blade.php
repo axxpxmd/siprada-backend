@@ -138,7 +138,7 @@
                                 <form class="needs-validation" id="form" method="POST"  enctype="multipart/form-data" novalidate>
                                     {{ method_field('POST') }}
                                     @csrf
-                                    <input type="hidden" name="perda_id" value="{{ $data->id }}">
+                                    <input type="hidde" name="perda_id" id="perda_id" value="{{ $data->id }}">
                                     <div class="form-row form-inline">
                                         <div class="col-md-12">
                                             <div class="form-group m-0">
