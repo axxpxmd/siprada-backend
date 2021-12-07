@@ -33,7 +33,7 @@
     </li>
     <li class="header light"><strong>MASTER DATA</strong></li>
     <li class="no-b">
-        <a href="#">
+        <a href="{{ route('konseling.index') }}">
             <i class="icon icon-chat2 text-purple s-18"></i> 
             <span>Konseling</span>
         </a>

@@ -46,4 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
     // Aspirasi
     Route::resource('aspirasi', 'AspirasiController');
     Route::post('aspirasi/api', 'AspirasiController@api')->name('aspirasi.api');
+
+    // Konseling 
+    Route::get('konseling', 'KonselingController@index')->name('konseling.index');
+    Route::get('konseling/{id}', 'KonselingController@show')->name('konseling.show');
+    Route::post('konseling/update/{id}', 'KonselingController@update')->name('konseling.update');
+    Route::post('konseling/api', 'KonselingController@api')->name('konseling.api');
 });
