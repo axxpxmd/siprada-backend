@@ -29,6 +29,7 @@
             <div class="tab-pane animated fadeInUpShort show active" id="semua-data" role="tabpanel">
                 <div class="row">
                     <div class="col-md-12">
+                        @include('layouts.alert')
                         <div class="card mt-2">
                             <h6 class="card-header"><strong>Data {{ $title }}</strong></h6>
                             <div class="card-body">
@@ -60,7 +61,7 @@
                                                     @endforeach
                                                 </div>
                                                 <hr class="mb-0">
-                                                <form class="needs-validation" novalidate method="POST" action="#" enctype="multipart/form-data">
+                                                <form class="needs-validation" novalidate method="POST" action="{{ route('aspirasi.store') }}" enctype="multipart/form-data">
                                                     @csrf
                                                     <input type="hidden" name="aspirasi_id" value="{{ $data->id }}">
                                                     <div class="form-group">

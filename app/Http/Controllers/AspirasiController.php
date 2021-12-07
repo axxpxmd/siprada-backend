@@ -73,4 +73,23 @@ class AspirasiController extends Controller
             'komentars'
         ));
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'komentar' => 'required|max:300'
+        ]);
+
+        $aspirasi = Aspirasi::find($request->aspirasi_id);
+
+        $data = new Komentar();
+        $data->aspirasi_id = $request->aspirasi_id;
+        $data->user_id = 5;
+        $data->komentar = $request->komentar;
+        $data->save();
+
+        return redirect()
+            ->route('aspirasi.show', $aspirasi->id)
+            ->withSuccess('BERHASIL! Balasan berhasil terkirim.');
+    }
 }
