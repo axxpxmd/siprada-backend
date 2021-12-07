@@ -39,7 +39,7 @@
         </a>
     </li>
     <li class="no-b">
-        <a href="#">
+        <a href="{{ route('aspirasi.index') }}">
             <i class="icon icon-document-text4 text-success s-18"></i> 
             <span>Aspirasi</span>
         </a>

@@ -42,4 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('perda/edit-rekam-jejak/{id}', 'PerdaController@editRekamJejak')->name('perda.editRekamJejak');
     Route::post('perda/update-rekam-jejak/{id}', 'PerdaController@updateRekamJejak')->name('perda.updateRekamJejak');
     Route::get('delete-file-rekam-jejak', 'PerdaController@deleteFileRekamJejak')->name('perda.deleteFileRekamJejak');
+
+    // Aspirasi
+    Route::resource('aspirasi', 'AspirasiController');
+    Route::post('aspirasi/api', 'AspirasiController@api')->name('aspirasi.api');
 });

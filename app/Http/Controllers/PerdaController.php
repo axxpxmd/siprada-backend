@@ -12,8 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Perda;
 use App\Models\Histori;
 use App\Models\Tahapan;
-use App\Models\HistoriFile;
 use App\Models\SubTahapan;
+use App\Models\HistoriFile;
 
 class PerdaController extends Controller
 {
