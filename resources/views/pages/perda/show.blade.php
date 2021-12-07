@@ -227,7 +227,10 @@
         pageLength: 25,
         ajax: {
             url: "{{ route($route.'api2') }}",
-            method: 'POST'
+            method: 'POST',
+            data: function (data) {
+                data.perda_id = $('#perda_id').val();
+            }
         },
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},

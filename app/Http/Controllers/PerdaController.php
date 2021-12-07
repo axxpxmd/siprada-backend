@@ -61,9 +61,11 @@ class PerdaController extends Controller
             ->toJson();
     }
 
-    public function api2()
+    public function api2(Request $request)
     {
-        $data = Histori::all();
+        $perda_id = $request->perda_id;
+
+        $data = Histori::where('perda_id', $perda_id)->get();
 
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
