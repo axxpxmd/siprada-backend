@@ -12,7 +12,7 @@ class Pengguna extends Model
 
     public static function queryTable($status, $status_user)
     {
-        $datas = Pengguna::select('id', 'nama', 'email', 'nik', 'status', 'status_user');
+        $datas = Pengguna::select('id', 'nama', 'email', 'nik', 'status', 'status_user')->whereNotIn('id', [1]);
 
         if ($status != null) {
             $datas->where('status', $status);

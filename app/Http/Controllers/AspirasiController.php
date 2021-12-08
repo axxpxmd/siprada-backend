@@ -84,7 +84,7 @@ class AspirasiController extends Controller
 
         $data = new Komentar();
         $data->aspirasi_id = $request->aspirasi_id;
-        $data->user_id = 5;
+        $data->user_id = 1;
         $data->komentar = $request->komentar;
         $data->save();
 

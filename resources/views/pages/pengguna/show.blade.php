@@ -53,13 +53,19 @@
                                         <label class="col-md-2 text-right s-12"><strong>Status User :</strong></label>
                                         <label class="col-md-8 s-12">{{ $data->status_user }}</label>
                                     </div>
+                                    @if ($data->status_user == 'kelompok')
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Nama Perusahaan / Kelompok :</strong></label>
                                         <label class="col-md-8 s-12">{{ $data->nama_perusahaan != null ? $data->nama_perusahaan : '-' }}</label>
                                     </div>
+                                    @endif
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>No Telp :</strong></label>
                                         <label class="col-md-8 s-12">{{ $data->no_telp }}</label>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-md-2 text-right s-12"><strong>Dokumen :</strong></label>
+                                        <label class="col-md-8 s-12"><a href="{{ config('app.sftp_src').'user/'.$data->foto }}" target="blank">{{ $data->foto }}</a></label>
                                     </div>
                                     <div class="row">
                                         <label class="col-md-2 text-right s-12"><strong>Keterangan :</strong></label>

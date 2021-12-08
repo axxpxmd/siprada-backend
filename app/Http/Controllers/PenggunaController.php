@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aspirasi;
 use Mail;
 use DataTables;
 
@@ -35,8 +36,10 @@ class PenggunaController extends Controller
         $datas = Pengguna::queryTable($status, $status_user);
 
         return DataTables::of($datas)
-            ->addColumn('action', function ($p) {
-                return '-';
+            ->addColumn('jumlah_aspirasi', function ($p) {
+                $totalAspirasi = Aspirasi::where('user_id', $p->id)->count();
+
+                return $totalAspirasi;
             })
             ->editColumn('nama', function ($p) {
                 return "<a href='" . route($this->route . 'show', $p->id) . "' class='text-primary' title='Menampilkan Data'>" . $p->nama . "</a>";
@@ -58,7 +61,7 @@ class PenggunaController extends Controller
                 }
             })
             ->addIndexColumn()
-            ->rawColumns(['action', 'nama', 'status', 'status_user'])
+            ->rawColumns(['jumlah_aspirasi', 'nama', 'status', 'status_user'])
             ->toJson();
     }
 
@@ -116,7 +119,7 @@ class PenggunaController extends Controller
         //TODO: Validation
         $request->validate([
             'status' => 'required',
-            'alasan' => 'max:100'
+            'alasan' => 'max:500'
         ]);
 
         //* Data
