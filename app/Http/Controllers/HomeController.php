@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aspirasi;
+use App\Models\Komentar;
+use App\Models\Pengguna;
+use App\Models\Perda;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -11,6 +16,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        $totalUser = Pengguna::whereNotIn('id', [1])->count();
+        $totalAspirasi = Aspirasi::count();
+        $totalKomentar = Komentar::count();
+        $totalPerda = Perda::count();
+
+        return view('home', compact(
+            'totalUser',
+            'totalAspirasi',
+            'totalKomentar',
+            'totalKomentar',
+            'totalPerda'
+        ));
     }
 }
