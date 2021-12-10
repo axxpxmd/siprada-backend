@@ -231,7 +231,8 @@ class PerdaController extends Controller
             'keterangan' => $request->keterangan,
             'ditarik' => 'tidak',
             'tampilkan' => 1,
-            'tgl_terbit' => $request->tgl_terbit
+            'tgl_terbit' => $request->tgl_terbit,
+            'tampilkan' => $request->tampilkan
         ]);
 
         return response()->json([

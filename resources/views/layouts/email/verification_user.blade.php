@@ -381,6 +381,7 @@
                                             <p>Kami telah memeriksa akun anda, dengan ini kami menyatakan akun anda telah <span class="fb">{{ $status }}</span></p>
                                             @if ($status == 'DITOLAK')
                                                 <p>Alasan ditolak : {{ $alasan }}</p>
+                                                <p>Silahkan login kembali ke SIPRADA dan edit data anda dengan benar.</p>
                                             @endif
                                             @if ($status == 'TERVERIFIKASI')
                                                 <p>Selamat, Anda telah menjadi ASPIRATOR. Silahkan login ke SIPRADA</p>

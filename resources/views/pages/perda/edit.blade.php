@@ -92,6 +92,15 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group mt-1">
+                                                        <label for="tampilkan" class="form-control label-input-custom col-md-4 font-weight-normal">Tampilkan<span class="text-danger ml-1">*</span></label>
+                                                        <div class="col-md-8 p-0 bg-light">
+                                                            <select class="select2 form-control r-0 light s-12" id="tampilkan" name="tampilkan" autocomplete="off">
+                                                                <option value="1">Ya</option>
+                                                                <option value="0">Tidak</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group m-0">
@@ -142,6 +151,8 @@
     $('#jenis').trigger('change.select2');
     $('#pemrakarsa').val("{{ $data->pemrakarsa }}");
     $('#pemrakarsa').trigger('change.select2');
+    $('#tampilkan').val("{{ $data->tampilkan }}");
+    $('#tampilkan').trigger('change.select2');
 
     $(function() {
         var jenis = $('#jenis').val();
