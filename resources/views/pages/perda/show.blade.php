@@ -138,7 +138,7 @@
                                 <form class="needs-validation" id="form" method="POST"  enctype="multipart/form-data" novalidate>
                                     {{ method_field('POST') }}
                                     @csrf
-                                    <input type="hidde" name="perda_id" id="perda_id" value="{{ $data->id }}">
+                                    <input type="hidden" name="perda_id" id="perda_id" value="{{ $data->id }}">
                                     <div class="form-row form-inline">
                                         <div class="col-md-12">
                                             <div class="form-group m-0">
@@ -183,8 +183,8 @@
                                                 <textarea rows="2" type="text" name="keterangan" id="keterangan" placeholder="Masukan keterangan (optional)" class="form-control r-0 light s-12 col-md-4" autocomplete="off"></textarea>
                                             </div>
                                             <div class="form-group m-0">
-                                                <label for="file" class="form-control label-input-custom col-md-2 font-weight-normal">File<span class="text-danger ml-1">*</span></label>
-                                                <input type="file" name="file[]" id="file" class="form-control r-0 light s-12 col-md-4" onchange="javascript:updateList()" multiple required/>
+                                                <label for="file" class="form-control label-input-custom col-md-2 font-weight-normal">File</label>
+                                                <input type="file" name="file[]" id="file" class="form-control r-0 light s-12 col-md-4" onchange="javascript:updateList()" multiple/>
                                             </div>
                                             <div class="form-group m-0">
                                                 <label class="form-control label-input-custom col-md-2 font-weight-normal"></label>

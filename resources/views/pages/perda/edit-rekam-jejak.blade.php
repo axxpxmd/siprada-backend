@@ -52,6 +52,16 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group mt-1">
+                                                        <label class="form-control label-input-custom col-md-2 font-weight-normal">Kegiatan<span class="text-danger ml-1">*</span></label>
+                                                        <div class="col-md-4 p-0 bg-light">
+                                                            <select class="select2 form-control r-0 light s-12" id="status_kegiatan" name="status_kegiatan" autocomplete="off">
+                                                                <option value="">Pilih</option>
+                                                                <option value="1">Ada</option>
+                                                                <option value="0">Tidak ada</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mt-1">
                                                         <label for="judul" class="form-control label-input-custom col-md-2 font-weight-normal">Judul<span class="text-danger ml-1">*</span></label>
                                                         <textarea rows="3" type="text" name="judul" id="judul" placeholder="Masukan Nama Kegiatan" class="form-control r-0 light s-12 col-md-4" autocomplete="off" required>{{ $data->judul }}</textarea>
                                                     </div>
@@ -65,7 +75,7 @@
                                                     </div>
                                                     <div class="form-group m-0">
                                                         <label for="file" class="form-control label-input-custom col-md-2 font-weight-normal">File</label>
-                                                        <input type="file" name="file[]" id="file" class="form-control r-0 light s-12 col-md-4" onchange="javascript:updateList()" multiple required/>
+                                                        <input type="file" name="file[]" id="file" class="form-control r-0 light s-12 col-md-4" onchange="javascript:updateList()" multiple/>
                                                         <br>
                                                     </div>
                                                     <div class="form-group m-0">
@@ -125,6 +135,9 @@
 @endsection
 @section('script')
 <script type="text/javascript">
+    $('#status_kegiatan').val("{{ $data->status_kegiatan }}");
+    $('#status_kegiatan').trigger('change.select2');
+
     updateList = function() {
         var input = document.getElementById('file');
         var output = document.getElementById('fileList');

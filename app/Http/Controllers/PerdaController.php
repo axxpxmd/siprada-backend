@@ -143,6 +143,17 @@ class PerdaController extends Controller
 
         $data = Perda::find($id);
 
+        $checkHistori = Histori::where('perda_id', $id)->orderBy('tahap_id', 'DESC')->orderBy('sub_tahap_id', 'DESC')->first();
+        if ($checkHistori != null) {
+            $tahap_id = $checkHistori->tahap_id;
+            $sub_tahap_id = $checkHistori->sub_tahap_id;
+
+            $data->update([
+                'tahap_id' => $tahap_id,
+                'sub_tahap_id' => $sub_tahap_id
+            ]);
+        }
+
         $tahaps = Tahapan::select('id', 'judul')->get();
         $sub_tahaps = SubTahapan::select('id', 'judul')->get();
 
@@ -314,6 +325,7 @@ class PerdaController extends Controller
         // Tahap 1
         $data = Histori::find($id);
         $data->update([
+            'status_kegiatan' => $request->status_kegiatan,
             'judul' => $request->judul,
             'tgl_kegiatan' => $request->tgl_kegiatan,
             'keterangan' => $request->keterangan
