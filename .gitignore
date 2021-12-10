@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 
 resources/views/auth/login.blade.php
+resources/views/layouts/app.blade.php
