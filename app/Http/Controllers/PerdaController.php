@@ -7,11 +7,13 @@ use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Aspirasi;
+use Illuminate\Support\Facades\Storage;
+
 // Models
 use App\Models\Perda;
 use App\Models\Histori;
 use App\Models\Tahapan;
+use App\Models\Aspirasi;
 use App\Models\SubTahapan;
 use App\Models\HistoriFile;
 
@@ -77,7 +79,9 @@ class PerdaController extends Controller
 
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
-                return "<a href='" . route($this->route . 'editRekamJejak', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
+                return "
+                <a href='" . route($this->route . 'editRekamJejak', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>
+                <a href='#' onclick='remove(" . $p->id . ")' class='text-danger mr-2' title='Hapus Permission'><i class='icon icon-remove'></i></a>";
             })
             ->editColumn('tahap_id', function ($p) {
                 return $p->tahap->judul;
@@ -159,6 +163,11 @@ class PerdaController extends Controller
             $data->update([
                 'tahap_id' => $tahap_id,
                 'sub_tahap_id' => $sub_tahap_id
+            ]);
+        } else {
+            $data->update([
+                'tahap_id' => 0,
+                'sub_tahap_id' => 0
             ]);
         }
 
@@ -375,9 +384,29 @@ class PerdaController extends Controller
         ]);
     }
 
+    public function deleteRekamJejak($id)
+    {
+        $data = Histori::find($id);
+
+        $files = HistoriFile::where('histori_id', $id)->get();
+        foreach ($files as $i) {
+            $exist = $i->file;
+            Storage::disk('sftp')->delete('perda/' . $exist);
+        }
+
+        $data->delete();
+
+        return response()->json([
+            'message' => 'File rekam jejak berhasil dihapus.'
+        ]);
+    }
+
     public function deleteFileRekamJejak(Request $request)
     {
         $data = HistoriFile::find($request->id);
+
+        $exist = $data->file;
+        Storage::disk('sftp')->delete('perda/' . $exist);
 
         $data->delete();
 

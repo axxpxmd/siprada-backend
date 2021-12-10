@@ -97,12 +97,14 @@
                             <h6 class="card-header"><strong>File Rekam Jejak</strong></h6>
                             <div class="card-body">
                                 <ol>
-                                    @foreach ($files as $i)
+                                    @forelse ($files as $i)
                                         <li>
                                             <a href="{{ config('app.sftp_src').'perda/'.$i->file }}" target="blank">{{ $i->file }}</a>
                                             <a href="#" class="text-danger" onclick="deleteFile({{ $i->id }})"><i class="icon icon-trash ml-1"></i></a>
                                         </li>
-                                    @endforeach
+                                    @empty
+                                    <p>Tidak ada file</p>
+                                    @endforelse
                                 </ol>
                             </div>
                         </div>

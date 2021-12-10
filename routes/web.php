@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('perda/simpan-rekam-jejak', 'PerdaController@storeRekamJejak')->name('perda.storeRekamJejak');
     Route::get('perda/edit-rekam-jejak/{id}', 'PerdaController@editRekamJejak')->name('perda.editRekamJejak');
     Route::post('perda/update-rekam-jejak/{id}', 'PerdaController@updateRekamJejak')->name('perda.updateRekamJejak');
+    Route::delete('perda/delete-rekam-jejak/{id}', 'PerdaController@deleteRekamJejak')->name('perda.deleteRekamJejak');
     Route::get('delete-file-rekam-jejak', 'PerdaController@deleteFileRekamJejak')->name('perda.deleteFileRekamJejak');
 
     // Aspirasi

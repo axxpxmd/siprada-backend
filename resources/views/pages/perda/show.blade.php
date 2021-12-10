@@ -114,9 +114,9 @@
                                             <th width="5%">No</th>
                                             <th width="10%">Tahapan</th>
                                             <th width="10%">Sub Tahapan</th>
-                                            <th width="30%">Judul</th>
+                                            <th width="18%">Judul</th>
                                             <th width="25%">Keterangan</th>
-                                            <th width="10%">Tanggal Kegiatan</th>
+                                            <th width="12%">Tanggal Kegiatan</th>
                                             <th width="5%">File</th>
                                             <th width="5%"></th>
                                         </thead>
@@ -319,5 +319,52 @@
         }
         $(this).addClass('was-validated');
     });
+
+    function remove(id){
+        $.confirm({
+            title: '',
+            content: 'Apakah Anda yakin akan menghapus data ini ?',
+            icon: 'icon icon-question amber-text',
+            theme: 'modern',
+            closeIcon: true,
+            animation: 'scale',
+            type: 'red',
+            buttons: {
+                ok: {
+                    text: "ok!",
+                    btnClass: 'btn-primary',
+                    keys: ['enter'],
+                    action: function(){
+                        $.post("{{ route($route.'deleteRekamJejak', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
+                            $('#dataTable').DataTable().ajax.reload();
+                            $.confirm({
+                                title: 'Success',
+                                content: data.message,
+                                icon: 'icon icon-check',
+                                theme: 'modern',
+                                closeIcon: true,
+                                animation: 'scale',
+                                autoClose: 'ok|3000',
+                                type: 'green',
+                                buttons: {
+                                    ok: {
+                                        text: "ok!",
+                                        btnClass: 'btn-primary',
+                                        keys: ['enter'],
+                                        action: function () {
+                                            location.reload();
+                                        }
+                                    }
+                                }
+                            });
+                        }, "JSON").fail(function(){
+                            reload();
+                        });
+                    }
+                },
+                cancel: function(){}
+            }
+        });
+    }
 </script>
 @endsection
