@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Aspirasi;
 // Models
 use App\Models\Perda;
 use App\Models\Histori;
@@ -41,7 +41,15 @@ class PerdaController extends Controller
 
         return DataTables::of($data)
             ->addColumn('action', function ($p) {
-                return "<a href='" . route($this->route . 'edit', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
+                $check = Aspirasi::where('perda_id', $p->id)->count();
+
+                if ($check == 0) {
+                    return "
+                    <a href='" . route($this->route . 'edit', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>
+                    <a href='#' onclick='remove(" . $p->id . ")' class='text-danger mr-2' title='Hapus Permission'><i class='icon icon-remove'></i></a>";
+                } else {
+                    return "<a href='" . route($this->route . 'edit', $p->id) . "' title='Edit Data'><i class='icon-pencil mr-1'></i></a>";
+                }
             })
             ->editColumn('judul', function ($p) {
                 return "<a href='" . route($this->route . 'show', $p->id) . "' class='text-primary' title='Menampilkan Data'>" . $p->judul . "</a>";
@@ -237,6 +245,15 @@ class PerdaController extends Controller
 
         return response()->json([
             'message' => 'Data ' . $this->title . ' berhasil diperbaharui.'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        Perda::destroy($id);
+
+        return response()->json([
+            'message' => 'Data ' . $this->title . ' berhasil dihapus.'
         ]);
     }
 
