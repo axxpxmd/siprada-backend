@@ -33,8 +33,9 @@
                                         <thead>
                                             <th width="5%">No</th>
                                             <th width="15%">User</th>
-                                            <th width="40%">Konseling</th>
-                                            <th width="40%">Jawaban</th>
+                                            <th width="37%">Konseling</th>
+                                            <th width="35%">Jawaban</th>
+                                            <th width="8%">Status</th>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
@@ -64,7 +65,8 @@
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
             {data: 'user_id', name: 'user_id'},
             {data: 'konseling', name: 'konseling'},
-            {data: 'jawaban', name: 'jawaban'}
+            {data: 'jawaban', name: 'jawaban'},
+            {data: 'status_balasan', name: 'status_balasan', className: 'text-center'}
         ]
     });
 

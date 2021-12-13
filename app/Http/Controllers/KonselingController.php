@@ -29,7 +29,7 @@ class KonselingController extends Controller
 
     public function api(Request $request)
     {
-        $datas = Konseling::all();
+        $datas = Konseling::orderBy('id', 'DESC')->get();
 
         return DataTables::of($datas)
             ->editColumn('konseling', function ($p) {
@@ -38,8 +38,15 @@ class KonselingController extends Controller
             ->editColumn('user_id', function ($p) {
                 return $p->user->nama;
             })
+            ->addColumn('status_balasan', function ($p) {
+                if ($p->jawaban == null) {
+                    return "<span class='badge badge-danger'>Belum</span>";
+                } else {
+                    return "<span class='badge badge-success'>Sudah</span>";
+                }
+            })
             ->addIndexColumn()
-            ->rawColumns(['action', 'konseling'])
+            ->rawColumns(['action', 'konseling', 'status_balasan'])
             ->toJson();
     }
 
