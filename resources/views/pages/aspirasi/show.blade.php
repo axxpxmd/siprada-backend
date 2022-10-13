@@ -47,6 +47,10 @@
                                             <label class="col-md-3 text-right s-12"><strong>Aspirasi :</strong></label>
                                             <label class="col-md-9 s-12">{{ $data->aspirasi }}</label>
                                         </div>
+                                        <div class="row">
+                                            <label class="col-md-3 text-right s-12"></label>
+                                            <label class="col-md-9 s-12"><input type="button" onclick="window.print();" value="Print" class="btn btn-sm btn-success"/></label>
+                                        </div>
                                     </div>
                                     <div class="col-md-7">
                                         <div class="card">
