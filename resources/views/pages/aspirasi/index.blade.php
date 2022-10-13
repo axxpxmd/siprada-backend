@@ -65,8 +65,9 @@
                                             <th width="5%">No</th>
                                             <th width="40%">Perda</th>
                                             <th width="32%">Aspirasi</th>
-                                            <th width="15%">Aspirator</th>
+                                            <th width="10%">Aspirator</th>
                                             <th width="8%">Balasan</th>
+                                            <th width="5%"></th>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
@@ -100,13 +101,57 @@
             {data: 'perda_id', name: 'perda_id'},
             {data: 'aspirasi', name: 'aspirasi'},
             {data: 'user_id', name: 'user_id'},
-            {data: 'balasan', name: 'balasan'}
+            {data: 'balasan', name: 'balasan'},
+            {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
     });
 
     function pressOnChange(){
         table.api().ajax.reload();
     }
-  
+
+    function remove(id){
+        $.confirm({
+            title: '',
+            content: 'Apakah Anda yakin akan menghapus data ini ?',
+            icon: 'icon icon-question amber-text',
+            theme: 'modern',
+            closeIcon: true,
+            animation: 'scale',
+            type: 'red',
+            buttons: {
+                ok: {
+                    text: "ok!",
+                    btnClass: 'btn-primary',
+                    keys: ['enter'],
+                    action: function(){
+                        $.post("{{ route($route.'destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
+                            $('#dataTable').DataTable().ajax.reload();
+                            $.confirm({
+                                title: 'Success',
+                                content: data.message,
+                                icon: 'icon icon-check',
+                                theme: 'modern',
+                                closeIcon: true,
+                                animation: 'scale',
+                                autoClose: 'ok|3000',
+                                type: 'green',
+                                buttons: {
+                                    ok: {
+                                        text: "ok!",
+                                        btnClass: 'btn-primary',
+                                        keys: ['enter']
+                                    }
+                                }
+                            });
+                        }, "JSON").fail(function(){
+                            reload();
+                        });
+                    }
+                },
+                cancel: function(){}
+            }
+        });
+    }
 </script>
 @endsection

@@ -39,6 +39,9 @@ class AspirasiController extends Controller
         $datas = Aspirasi::queryTable($perda_id);
 
         return DataTables::of($datas)
+            ->addColumn('action', function ($p) {
+                return "<a href='#' onclick='remove(" . $p->id . ")' class='text-danger mr-2' title='Hapus Permission'><i class='icon icon-remove'></i></a>";
+            })
             ->editColumn('aspirasi', function ($p) {
                 return "<a href='" . route($this->route . 'show', $p->id) . "' class='text-primary' title='Menampilkan Data'>" . $p->aspirasi . "</a>";
             })
@@ -91,5 +94,18 @@ class AspirasiController extends Controller
         return redirect()
             ->route('aspirasi.show', $aspirasi->id)
             ->withSuccess('BERHASIL! Balasan berhasil terkirim.');
+    }
+
+    public function destroy($id)
+    {
+        $apirasi = Aspirasi::find($id);
+
+        Komentar::where('aspirasi_id', $id)->delete();
+
+        $apirasi->delete();
+
+        return response()->json([
+            'message' => 'Data berhasil dihapus.'
+        ]);
     }
 }

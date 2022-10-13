@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Aspirasi
     Route::resource('aspirasi', 'AspirasiController');
     Route::post('aspirasi/api', 'AspirasiController@api')->name('aspirasi.api');
+    Route::delete('aspirasi/delete/{id}', 'AspirasiController@destroy')->name('aspirasi.delete');
 
     // Konseling 
     Route::get('konseling', 'KonselingController@index')->name('konseling.index');
